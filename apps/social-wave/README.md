@@ -48,7 +48,7 @@ All commands are run from the root of the project, from a terminal:
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 
-**Terms and Conditions**
+
 <h1>Website Terms and Conditions of Use</h1>
 
 <h2>1. Terms</h2>
@@ -97,7 +97,7 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 
 <p>Any claim related to Socialoc's Website shall be governed by the laws of us without regards to its conflict of law provisions.</p>
 
-**Privacy Policy**
+
 <h1>Privacy Policy for Socialoc</h1>
 
 <p>At Socialoc, accessible from https://Socialoc.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Socialoc and how we use it.</p>
