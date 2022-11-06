@@ -1,9 +1,43 @@
 ---
-export interface Props {
-	title: string;
-}
+import { SEO } from 'astro-seo';
+import './../index.css';
+import NavBar from "./../components/NavBar";
+import Footer from "./../components/footer/Footer";
+import { siteName } from '../details';
+import { 
+	redirectToTwitterLogin, 
+	getAuthenticatedUser 
+} from './../vendors/firebase/browser/auth';
+import { authenticatedUser } from './../stores/authenticated-user';
 
-const { title } = Astro.props;
+export interface Props {
+	title?: string;
+	description: string;
+	index?: boolean;
+	follow?: boolean;
+	og_title?: string;
+	og_image?: string;
+	og_decription?: string;
+}
+const { 
+	title, 
+	description,
+	index = true,
+	follow = true,
+	og_title = title ? title : siteName,
+	og_image = '',
+	og_description = ''
+} = Astro.props;
+
+// attempt to authenticate
+try {
+	const user = await getAuthenticatedUser();
+	authenticatedUser.set(user);
+}
+catch(e) {
+	// not logged in.
+	authenticatedUser.set(null);
+}
 ---
 
 <!DOCTYPE html>
@@ -11,25 +45,35 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<SEO 
+			title={`${title ? title + ' - ' : ''}${siteName}`}
+			description={description}
+			noindex={!index}
+			nofollow={!follow}
+			openGraph={{
+				image: {
+					alt: "Socialoc cover image"
+				},
+				optional: {
+					description: og_description,
+					siteName: siteName
+				},
+				basic: {
+					title: og_title,
+					type: 'website',
+					image: og_image || '/images/social_cover.jpg',
+					url: 'https://perivel.com',
+				},
+			}}
+		/>
 	</head>
-	<body>
-		<slot />
+	<body class="bg-white w-screen h-screen">
+		<NavBar client:load />
+		<div class="pt-2 w-full h-min">
+			<slot />
+		</div>
+		<Footer client:load />
 	</body>
 </html>
-<style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-</style>

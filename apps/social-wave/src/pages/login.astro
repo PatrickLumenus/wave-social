@@ -1,0 +1,16 @@
+---
+import { linkWithRedirect } from "firebase/auth";
+import Layout from "../layouts/Layout.astro";
+import { redirectToTwitterLogin } from './../vendors/firebase/browser/auth';
+import LoginWithTwitterButton from "../components/elements/LoginithTwitterButton";
+
+const initiateTwitterLogin = () => {
+    console.log('Redirecting to Twitter Login Page');
+    redirectToTwitterLogin();
+}
+---
+<Layout description="Login to the site">
+    <main>
+        <LoginWithTwitterButton client:load />
+    </main>
+</Layout>
