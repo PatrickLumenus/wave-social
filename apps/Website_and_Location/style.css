@@ -1,0 +1,23 @@
+h1 {
+  font-family: sans serif;
+  text-align: center;
+  font-size: 42px;
+}
+
+p {
+  font-size: 20px;
+}
+
+.thickBlack {
+  border-color: CornflowerBlue;
+  border-width: 40px;
+  border-style: solid;
+  background-color: CornflowerBlue;
+}
+
+#map {
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+}
